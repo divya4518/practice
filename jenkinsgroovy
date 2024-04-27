@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('git') {
+            steps {
+                echo 'taking URL from git'
+		git branch: 'main', url: 'https://github.com/devopstraininghub/mindcircuit13.git'
+            }
+        }
+
+	stage('build war file') {
+            steps {
+                echo 'building war file from git'
+		sh 'mvn clean install'
+            }
+        }
+	stage('deploy to tomcat') {
+            steps {
+                echo 'deploying war file to jenkins'
+	    deploy adapters: [tomcat9(credentialsId: '23fc1b74-5d9f-4b83-bcce-7680cf7eecb1', path: '', url: 'http://3.85.141.17:8091/')], contextPath: 'divya-tom', war: '**/*.war'
+            }
+        }
+
+
+    }
+}
