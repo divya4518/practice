@@ -1,0 +1,26 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cal-deploy
+  labels:
+    name: cal-deploy
+    app: calculator-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: cal-pod
+      app: calculator-app
+  template:
+    metadata:
+      name: cal-pod
+      labels:
+        name: cal-pod
+        app: calculator-app
+    spec:
+      containers:
+      - name: divyacon
+        image: divya1233/docker:thonimg
+        ports:
+          - containerPort: 8080
