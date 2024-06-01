@@ -21,6 +21,6 @@ spec:
     spec:
       containers:
       - name: divyacon
-        image: divya1233/docker:thonimg
+        image: devopshubg333/batch13:mindcircuit13img
         ports:
           - containerPort: 8080
